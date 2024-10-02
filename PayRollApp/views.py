@@ -63,3 +63,19 @@ def EmployeeUpadte(request, id):
         return redirect("employe_list")
 
     return render(request, TemplateFile, context=dict)
+
+#function for adding new employee
+def AddEmployee(request):
+    TemplateFile = "PayRollApp/AddEmployee.html"
+    employee = Employe()
+
+    form = EmployeeForm(instance=employee)
+    dict = {'form' : form}
+
+    if request.method == "POST":
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+        return redirect("employe_list")
+
+    return render(request, TemplateFile, context=dict)
