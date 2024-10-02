@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 
+from PayRollApp.forms import EmployeeForm
 from PayRollApp.models import Employe
 
 # Create your views here.
@@ -14,7 +15,6 @@ def EmployeeDetails(request, id):
     TemplateFile = "PayRollApp/EmployeeDetails.html"
     employee = Employe.objects.get(id = id)
     dict = {'employee' : employee}
-    print(dict)
     return render(request, TemplateFile, context=dict)
 
 #function for deleting an employee
@@ -45,5 +45,21 @@ def EmployeeDelete(request, id):
 
         # **kwargs: Keyword arguments to pass if your URL pattern expects parameters (e.g., passing an id to a detail view).
         #path('employees/<int:id>/', views.employee_detail, name='employee_detail')
+
+    return render(request, TemplateFile, context=dict)
+
+#function for editing employee detail
+def EmployeeUpadte(request, id):
+    TemplateFile = "PayRollApp/EmployeeUpadte.html"
+    employee = Employe.objects.get(id = id)
+
+    form = EmployeeForm(instance=employee)
+    dict = {'form' : form}
+
+    if request.method == "POST":
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+        return redirect("employe_list")
 
     return render(request, TemplateFile, context=dict)
