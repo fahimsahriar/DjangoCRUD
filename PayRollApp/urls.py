@@ -5,5 +5,6 @@ from PayRollApp import views
 
 
 urlpatterns = [
-    path('Employees/', views.EmployeesList, name='person_list'),
+    path('Employees/', views.EmployeesList, name='employe_list'),
+    path('employee/<int:id>/', views.EmployeeDetails, name='employee_detail'),
 ]

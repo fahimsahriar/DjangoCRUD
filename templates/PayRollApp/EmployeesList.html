@@ -28,6 +28,8 @@
             <th>Notes</th>
             <th>Country</th>
             <th>Email</th>
+            <th>Actions</th>
+            <!-- New Actions Column -->
           </tr>
         </thead>
         <tbody>
@@ -44,10 +46,20 @@
             <td>{{ employee.Notes }}</td>
             <td>{{ employee.Country }}</td>
             <td>{{ employee.Email }}</td>
+            <td>
+              <!-- Action buttons: Detail, Edit, Delete -->
+              <a
+                href="../employee/{{employee.id}}"
+                class="btn btn-primary btn-sm"
+                >Detail</a
+              >
+              <a href="" class="btn btn-warning btn-sm">Edit</a>
+              <a href="" class="btn btn-danger btn-sm">Delete</a>
+            </td>
           </tr>
           {% empty %}
           <tr>
-            <td colspan="11">No employees found.</td>
+            <td colspan="12">No employees found.</td>
           </tr>
           {% endfor %}
         </tbody>
