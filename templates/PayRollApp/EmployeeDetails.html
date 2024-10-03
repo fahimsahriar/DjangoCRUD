@@ -58,6 +58,24 @@
 
           <div class="row mb-3">
             <div class="col-md-4">
+              <strong>Department:</strong>
+            </div>
+            <div class="col-md-8">
+              {{ employee.EmployeeDepartment.DepartmentName }}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <strong>Location:</strong>
+            </div>
+            <div class="col-md-8">
+              {{ employee.EmployeeDepartment.LocationName }}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4">
               <strong>Notes:</strong>
             </div>
             <div class="col-md-8">{{ employee.Notes }}</div>
@@ -67,7 +85,7 @@
             <div class="col-md-4">
               <strong>Country:</strong>
             </div>
-            <div class="col-md-8">{{ employee.get_Country_display }}</div>
+            <div class="col-md-8">{{ employee.Country }}</div>
           </div>
 
           <div class="row mb-3">
@@ -79,8 +97,16 @@
 
           <!-- Buttons for navigation -->
           <div class="d-flex justify-content-end">
-            <a href="" class="btn btn-warning me-2">Edit</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a
+              href="../../EmployeeUpadte/{{employee.id}}"
+              class="btn btn-warning me-2"
+              >Edit</a
+            >
+            <a
+              href="../../DeleteEmployee/{{employee.id}}"
+              class="btn btn-danger"
+              >Delete</a
+            >
           </div>
         </div>
       </div>

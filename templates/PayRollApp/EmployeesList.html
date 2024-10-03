@@ -29,6 +29,8 @@
             <th>Hiring Date</th>
             <th>Notes</th>
             <th>Country</th>
+            <th>Department</th>
+            <th>Location</th>
             <th>Email</th>
             <th>Actions</th>
             <!-- New Actions Column -->
@@ -46,7 +48,13 @@
             <td>{{ employee.BirthDate }}</td>
             <td>{{ employee.HiringDate }}</td>
             <td>{{ employee.Notes }}</td>
-            <td>{{ employee.Country }}</td>
+            <!-- Accessing the foreign key's related object fields -->
+            <td>{{ employee.Country.CountryName }}</td>
+            <!-- Display CountryName -->
+            <td>{{ employee.EmployeeDepartment.DepartmentName }}</td>
+            <!-- Display DepartmentName -->
+            <td>{{ employee.EmployeeDepartment.LocationName }}</td>
+            <!-- Display LocationName -->
             <td>{{ employee.Email }}</td>
             <td>
               <!-- Action buttons: Detail, Edit, Delete -->

@@ -1,0 +1,42 @@
+[
+    {
+        "model" : "PayRollApp.Department",
+        "pk" : 1,
+        "fields" : {
+            "DepartmentName" : "HR",
+            "LocationName" : "Admin"
+        }
+    },
+    {
+        "model" : "PayRollApp.Department",
+        "pk" : 2,
+        "fields" : {
+            "DepartmentName" : "Dev",
+            "LocationName" : "Production"
+        }
+    },
+    {
+        "model" : "PayRollApp.Department",
+        "pk" : 3,
+        "fields" : {
+            "DepartmentName" : "QA",
+            "LocationName" : "Production"
+        }
+    },
+    {
+        "model" : "PayRollApp.Department",
+        "pk" : 4,
+        "fields" : {
+            "DepartmentName" : "Business Analyst",
+            "LocationName" : "Business Dev"
+        }
+    },
+    {
+        "model" : "PayRollApp.Department",
+        "pk" : 5,
+        "fields" : {
+            "DepartmentName" : "Marketing",
+            "LocationName" : "Business Dev"
+        }
+    }
+]
