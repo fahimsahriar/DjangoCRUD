@@ -14,7 +14,25 @@
     <div class="container mt-5">
       <h2 class="mb-4">Employee List</h2>
 
-      <a href="/persons/AddEmployee">Add new employee</a>
+      <div class="d-flex justify-content-between mb-3">
+        <!-- Add new employee link -->
+        <a href="/persons/AddEmployee" class="btn btn-success"
+          >Add new employee</a
+        >
+
+        <!-- Bootstrap search box -->
+        <form class="d-flex" method="GET" action="">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search employees"
+            aria-label="Search"
+            name="search"
+            value="{{ search_query }}"
+          />
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+      </div>
 
       <table class="table table-striped table-bordered">
         <thead class="thead-dark">
@@ -33,7 +51,6 @@
             <th>Location</th>
             <th>Email</th>
             <th>Actions</th>
-            <!-- New Actions Column -->
           </tr>
         </thead>
         <tbody>
@@ -48,36 +65,29 @@
             <td>{{ employee.BirthDate }}</td>
             <td>{{ employee.HiringDate }}</td>
             <td>{{ employee.Notes }}</td>
-            <!-- Accessing the foreign key's related object fields -->
             <td>{{ employee.Country.CountryName }}</td>
-            <!-- Display CountryName -->
             <td>{{ employee.EmployeeDepartment.DepartmentName }}</td>
-            <!-- Display DepartmentName -->
             <td>{{ employee.EmployeeDepartment.LocationName }}</td>
-            <!-- Display LocationName -->
             <td>{{ employee.Email }}</td>
             <td>
-              <!-- Action buttons: Detail, Edit, Delete -->
-              <a
-                href="../employee/{{employee.id}}"
-                class="btn btn-primary btn-sm"
+              <a href="../employee/{{employee.id}}" class="btn-primary btn-sm"
                 >Detail</a
               >
               <a
-                href="../EmployeeUpadte/{{employee.id}}"
-                class="btn btn-warning btn-sm"
+                href="../EmployeeUpdate/{{employee.id}}"
+                class="btn-warning btn-sm"
                 >Edit</a
               >
               <a
                 href="../DeleteEmployee/{{employee.id}}"
-                class="btn btn-danger btn-sm"
+                class="btn-danger btn-sm"
                 >Delete</a
               >
             </td>
           </tr>
           {% empty %}
           <tr>
-            <td colspan="12">No employees found.</td>
+            <td colspan="14">No employees found.</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -91,7 +101,8 @@
           {% endif %}
 
           <span class="current">
-            Page {{ employees.number }} of {{ employees.paginator.num_pages }}.
+            Page {{ employees.number }} of
+            <span> {{ employees.paginator.num_pages}}. </span>
           </span>
 
           {% if employees.has_next %}

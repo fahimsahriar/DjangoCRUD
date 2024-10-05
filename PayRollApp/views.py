@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 from PayRollApp.forms import EmployeeForm
 from PayRollApp.models import Employe
@@ -10,12 +11,25 @@ def EmployeesList(request):
     TemplateFile = "PayRollApp/EmployeesList.html"
 
     #Employees = Employe.objects.all()
-    Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').all()
+    #Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').all()
     # for employee in Employees:
     #     print(employee.FirstName, employee.LastName, employee.Salary)
     #     fields = [field.name for field in employee._meta.get_fields()]
     #     print(fields)
 
+    #search query code
+    search_query = request.GET.get('search', '') #(parameter explanation)if we try to put something on search box
+    #then it will come along search, either
+    #the search query will be empty
+    Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').filter(
+        Q(id__icontains=search_query) |
+        Q(FirstName__icontains=search_query) |
+        Q(LastName__icontains=search_query) |
+        Q(Email__icontains=search_query) |
+        Q(TitleName__icontains=search_query) 
+    )
+
+    #Paginator code
     page_size = getattr(settings, 'Employee_List_Page_Size', 2)
     paginator = Paginator(Employees, page_size)  # Show 25 contacts per page.
     page_number = request.GET.get("page")
