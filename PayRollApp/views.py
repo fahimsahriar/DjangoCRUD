@@ -1,10 +1,14 @@
 from django.shortcuts import redirect, render
+from django.core.paginator import Paginator
 
 from PayRollApp.forms import EmployeeForm
 from PayRollApp.models import Employe
+from crudProjectDjango import settings
 
 # Create your views here.
 def EmployeesList(request):
+    TemplateFile = "PayRollApp/EmployeesList.html"
+
     #Employees = Employe.objects.all()
     Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').all()
     # for employee in Employees:
@@ -12,8 +16,12 @@ def EmployeesList(request):
     #     fields = [field.name for field in employee._meta.get_fields()]
     #     print(fields)
 
-    TemplateFile = "PayRollApp/EmployeesList.html"
-    dict = {'employees' : Employees}
+    page_size = getattr(settings, 'Employee_List_Page_Size', 2)
+    paginator = Paginator(Employees, page_size)  # Show 25 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    
+    dict = {'employees' : page_obj}
     return render(request, TemplateFile, context=dict)
 
 #function for individual employee detail
