@@ -95,8 +95,8 @@ def EmployeeDelete(request, id):
     return render(request, TemplateFile, context=dict)
 
 #function for editing employee detail
-def EmployeeUpadte(request, id):
-    TemplateFile = "PayRollApp/EmployeeUpadte.html"
+def EmployeeUpdate(request, id):
+    TemplateFile = "PayRollApp/EmployeeUpdate.html"
     employee = Employe.objects.get(id = id)
 
     if request.method == "POST":
