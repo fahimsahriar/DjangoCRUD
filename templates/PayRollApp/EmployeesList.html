@@ -9,6 +9,13 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/css/sortable-theme-bootstrap.css"
+      integrity="sha512-ejAo3nK8bdfwg68A9g6QYUdqnTmcGem1OX8AeVwa+dQH2v22vEwPkbZQzltTE+bjXt72iGvglAw0h+Up+fOg0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="container mt-5">
@@ -34,7 +41,10 @@
         </form>
       </div>
 
-      <table class="table table-striped table-bordered">
+      <table
+        class="table sortable-theme-bootstrap table-striped table-bordered"
+        data-sortable
+      >
         <thead class="thead-dark">
           <tr>
             <th>#</th>
@@ -56,7 +66,7 @@
         <tbody>
           {% for employee in employees %}
           <tr>
-            <td>{{ forloop.counter }}</td>
+            <td>{{ employee.id }}</td>
             <td>{{ employee.FirstName }}</td>
             <td>{{ employee.LastName }}</td>
             <td>{{ employee.TitleName }}</td>
@@ -115,5 +125,11 @@
 
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js"
+      integrity="sha512-DEcSaL0BWApJ//v7ZfqAI04nvK+NQcUVwrrx/l1x7OJgU0Cwbq7e459NBMzLPrm8eLPzAwBtiJJS4AvLZDZ8xA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>

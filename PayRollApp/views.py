@@ -17,6 +17,16 @@ def EmployeesList(request):
     #     fields = [field.name for field in employee._meta.get_fields()]
     #     print(fields)
 
+    #sorting
+    sort_by = request.GET.get('sort_by', 'id')
+    sort_order = request.GET.get('sort_order', 'asc')
+
+    valid_sort_fields = ['id', 'FirstName', 'LastName', 'TitleName']
+    if sort_by not in valid_sort_fields:
+        sort_by = 'id'
+
+    
+
     #search query code
     search_query = request.GET.get('search', '') #(parameter explanation)if we try to put something on search box
     #then it will come along search, either
@@ -29,13 +39,20 @@ def EmployeesList(request):
         Q(TitleName__icontains=search_query) 
     )
 
+    #sorting part 2
+    if(sort_order == 'dsc'):
+        Employees = Employees.order_by(f'-{sort_by}')
+    else:
+        Employees = Employees.order_by(sort_by)
+        
+
     #Paginator code
     page_size = getattr(settings, 'Employee_List_Page_Size', 2)
     paginator = Paginator(Employees, page_size)  # Show 25 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
-    dict = {'employees' : page_obj}
+    dict = {'employees' : page_obj, 'sort_by': sort_by, 'sort_order': sort_order}
     return render(request, TemplateFile, context=dict)
 
 #function for individual employee detail
