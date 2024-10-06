@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Value
+from django.db.models.functions import Concat
 
 from PayRollApp.forms import EmployeeForm
 from PayRollApp.models import Employe
@@ -31,12 +32,23 @@ def EmployeesList(request):
     search_query = request.GET.get('search', '') #(parameter explanation)if we try to put something on search box
     #then it will come along search, either
     #the search query will be empty
-    Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').filter(
+    # Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').filter(
+    #     Q(id__icontains=search_query) |
+    #     Q(FirstName__icontains=search_query) |
+    #     Q(LastName__icontains=search_query) |
+    #     Q(Email__icontains=search_query) |
+    #     Q(TitleName__icontains=search_query) 
+    # )
+
+    Employees = Employe.objects.select_related('EmployeeDepartment', 'Country').annotate(
+    full_name=Concat('FirstName', Value(' '), 'LastName', Value(' '), 'TitleName')
+    ).filter(
         Q(id__icontains=search_query) |
         Q(FirstName__icontains=search_query) |
         Q(LastName__icontains=search_query) |
         Q(Email__icontains=search_query) |
-        Q(TitleName__icontains=search_query) 
+        Q(TitleName__icontains=search_query) |
+        Q(full_name__icontains=search_query)  # Search the combined full_name
     )
 
     #sorting part 2
