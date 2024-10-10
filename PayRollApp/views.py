@@ -2,8 +2,10 @@ from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
-from PayRollApp.forms import EmployeeForm
+from PayRollApp.forms import EmployeeForm, SignUpForm
 from PayRollApp.models import Employe
 from crudProjectDjango import settings
 
@@ -139,3 +141,21 @@ def AddEmployee(request):
     dict = {'form' : form}
 
     return render(request, TemplateFile, context=dict)
+
+#user sign up / register
+def SignUp(request):
+    TemplateFile = "PayRollApp/signup.html"
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            login(request, user)
+            return redirect('home')
+    else:   
+        form = SignUpForm()
+    return render(request, TemplateFile, {'form': form})
+    
+def Home(request):
+    TemplateFile = "PayRollApp/home.html"
+    return render(request, TemplateFile)

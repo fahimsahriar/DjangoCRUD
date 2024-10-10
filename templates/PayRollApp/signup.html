@@ -1,0 +1,18 @@
+{% extends 'PayRollApp/Base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Sign Up</h2>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        {% comment %} <a href="{% url 'login' %}" class="btn btn-secondary">Already have an account? Log in</a> {% endcomment %}
+    </form>
+</div>
+{% endblock %}

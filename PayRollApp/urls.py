@@ -10,4 +10,6 @@ urlpatterns = [
     path('DeleteEmployee/<int:id>/', views.EmployeeDelete, name='Delete_Employee'),
     path('EmployeeUpdate/<int:id>/', views.EmployeeUpdate, name='EmployeeUpdate'),
     path('AddEmployee/', views.AddEmployee, name='AddEmployee'),
+    path('signup/', views.SignUp, name='signup'),
+    path('home/', views.Home, name='home'),
 ]
