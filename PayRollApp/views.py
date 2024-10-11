@@ -2,8 +2,8 @@ from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 
 from PayRollApp.forms import EmployeeForm, SignUpForm
 from PayRollApp.models import Employe
@@ -155,6 +155,27 @@ def SignUp(request):
     else:   
         form = SignUpForm()
     return render(request, TemplateFile, {'form': form})
+
+#user login
+def login_view(request):
+    TemplateFile = "PayRollApp/login.html"
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')  # Redirect to homepage after login
+    else:
+        form = AuthenticationForm()
+    return render(request, TemplateFile, {'form': form})
+
+#logout function
+def user_logout(request):
+    logout(request)
+    return redirect('login')  # Redirect to homepage after logout
     
 def Home(request):
     TemplateFile = "PayRollApp/home.html"

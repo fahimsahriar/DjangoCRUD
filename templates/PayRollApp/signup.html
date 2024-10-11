@@ -4,15 +4,14 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4">Sign Up</h2>
-
+    <h2 class="mb-4">User Registration</h2>
     <form method="post" action="">
         {% csrf_token %}
-        
-        {{ form.as_p }}
-
+        <table class="table">
+            {{ form.as_table }}
+        </table>
         <button type="submit" class="btn btn-primary">Sign Up</button>
-        {% comment %} <a href="{% url 'login' %}" class="btn btn-secondary">Already have an account? Log in</a> {% endcomment %}
+        <a href="{% url 'login' %}" class="btn btn-secondary">Already have an account? Log in</a>
     </form>
 </div>
 {% endblock %}

@@ -3,9 +3,12 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="container text-center mt-5">
-    <h1 class="display-4">Welcome to My Website {{ user.first_name }} {{ user.last_name }}</h1>
-    <p class="lead mt-4">This is a simple homepage built with Django and Bootstrap. You can navigate through different sections of the website using the menu above.</p>
-    <a href="#" class="btn btn-primary btn-lg mt-3">Learn More</a>
+<div class="d-flex justify-content-center align-items-center min-vh-100 text-center">
+    <div>
+        <h1 class="display-4">Welcome to My CRUD Web App {{ user.first_name }} {{ user.last_name }}</h1>
+        <p class="lead mt-4">This is a simple homepage built with Django and Bootstrap. You can navigate through different sections of the website using the menu above.</p>
+    </div>
 </div>
+
+
 {% endblock %}
