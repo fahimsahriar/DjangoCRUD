@@ -1,6 +1,6 @@
 # Django Project
 
-This is a Django web application that uses SQLite3 as the database. This README provides instructions on how to set up the project on a new machine and get it running.
+This Django-based project is a CRUD web application designed for managing employee details. It uses SQLite3 as the database, offering functionalities such as adding, updating, deleting, and viewing employee records. The app includes authentication features and utilizes Bootstrap for a responsive, user-friendly interface. The project is set up with virtual environment recommendations, dependencies managed via requirements.txt, and database initialization through Django migrations. Additionally, fixtures can be loaded for initial data. The project also features a well-structured README for new developers, making it easy to set up and run the application on different machines.
 
 ## Prerequisites
 
